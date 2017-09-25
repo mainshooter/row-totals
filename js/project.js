@@ -70,6 +70,14 @@ var TabelGen;
     },
     maximumRows: function() {
       return(row.length);
+    },
+
+    header: function() {
+      var content = '';
+      for (var i = 0; i < TabelGen.maximumRows(); i++) {
+        content += "<th>" + i + "</th>";
+      }
+      return(content);
     }
   }
 })();
