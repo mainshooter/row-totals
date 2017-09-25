@@ -13,15 +13,14 @@ var TabelGen;
 (function() {
   TableFlip = {
 
-    flipArray: function() {
+    flipArray: function(IncomingArray) {
       var tmpTable = [];
       // Create the one dept array
-      console.log(tmpTable);
-      for (var i = 0; i < row.length; ++i) {
+      for (var i = 0; i < IncomingArray.length; ++i) {
         tmpTable[i] = [];
         // Create the 2 depth array
-        for (var t = 0; t < row[i].length; ++t) {
-          tmpTable[i][t] = row[t][i];
+        for (var t = 0; t < IncomingArray[i].length; ++t) {
+          tmpTable[i][t] = IncomingArray[t][i];
           // To place the flip value
         }
       }
@@ -81,9 +80,15 @@ var TabelGen;
 
 (function() {
   TabelGen = {
+    tableArray: [],
+
+    setTableArray: function(array) {
+      TabelGen.tableArray = array;
+    },
+
     maximumCols: function() {
       var currentMax = 0;
-      row.forEach(function(rowArray, index, arr) {
+      TabelGen.tableArray.forEach(function(rowArray, index, arr) {
           if (currentMax < rowArray.length) {
             currentMax = rowArray.length;
           }
@@ -91,7 +96,7 @@ var TabelGen;
       return(currentMax);
     },
     maximumRows: function() {
-      return(row.length);
+      return(TabelGen.tableArray.length);
     },
 
     header: function() {
@@ -104,7 +109,8 @@ var TabelGen;
 
     content: function() {
       var content = '';
-      row.forEach(function(rowArray, index, arr) {
+      var currentArray = TabelGen.tableArray;
+      currentArray.forEach(function(rowArray, index, arr) {
         content += '<tr>';
           // content += '<th>' + index + '</th>';
         rowArray.forEach(function(value, index, arr) {
@@ -126,5 +132,6 @@ var TabelGen;
     }
   }
 })();
-
-// select("#test").innerHTML = TabelGen.generate();
+var flippedArray = TableFlip.flipArray(row);
+TabelGen.setTableArray(flippedArray);
+select("#test").innerHTML = TabelGen.generate();
