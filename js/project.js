@@ -74,10 +74,35 @@ var TabelGen;
 
     header: function() {
       var content = '';
-      for (var i = 0; i < TabelGen.maximumRows(); i++) {
+      for (var i = 0; i < TabelGen.maximumRows() + 1; i++) {
         content += "<th>" + i + "</th>";
       }
       return(content);
+    },
+
+    content: function() {
+      var content = '';
+      row.forEach(function(rowArray, index, arr) {
+        content += '<tr>';
+        content += '<th>' + index + '</th>';
+        rowArray.forEach(function(value, index, arr) {
+          content += '<td>' + value +  '</td>';
+        });
+        content += '</tr>';
+      });
+      return(content);
+    },
+
+    generate: function() {
+      var table = '<table>';
+      table += '<tr>';
+      table += TabelGen.header();
+      table += '</tr>';
+      table += TabelGen.content();
+      table += '</table>';
+      return(table);
     }
   }
 })();
+
+select("#test").innerHTML = TabelGen.generate();
