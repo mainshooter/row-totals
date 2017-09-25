@@ -9,12 +9,26 @@ var rowCounter;
 
 (function() {
   rowCounter = {
-    oneRow: function(rowNumber) {
-      var teller = 0;
-      row[rowNumber].forEach(function(value, index, arr) {
-        teller = teller + parseFloat(value);
-      });
-      return(teller);
+    oneRow: function(rowNumber = false) {
+      if (rowNumber != false) {
+        if (rowNumber < row.length -1) {
+          var teller = 0;
+          row[rowNumber].forEach(function(value, index, arr) {
+            teller = teller + parseFloat(value);
+          });
+          return(teller);
+        }
+
+        else {
+          console.log("We don't have that place in our array!");
+        }
+
+      }
+
+      else {
+        console.log("No number");
+      }
+
     },
     allRows: function() {
       var teller = 0;
