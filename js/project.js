@@ -8,26 +8,24 @@ var rowCounter;
 var TableFlip;
 var TabelGen;
 
-var tmpTable;
+
 
 (function() {
   TableFlip = {
 
     flipArray: function() {
-      tmpTable = new Array(row.length);
+      var tmpTable = [];
+      // Create the one dept array
+      console.log(tmpTable);
       for (var i = 0; i < row.length; ++i) {
-        tmpTable[i] = new Array(row[i].length);
+        tmpTable[i] = [];
+        // Create the 2 depth array
+        for (var t = 0; t < row[i].length; ++t) {
+          tmpTable[i][t] = row[t][i];
+          // To place the flip value
+        }
       }
-      // To create empty array as a copy
-
-      row.forEach(function(rowArray, indexTop, arrTop) {
-        // tmpTable [arrTop[indexTop];
-        rowArray.forEach(function(value, index, arr) {
-          tmpTable[index][indexTop] = value;
-        });
-        row = tmpTable;
-        select("#test").innerHTML = TabelGen.generate();
-      });
+      return(tmpTable);
     }
   }
 })();
