@@ -9,6 +9,11 @@ var rowCounter;
 
 (function() {
   rowCounter = {
+    /**
+     * Counts all values from a roe
+     * @param  {int} [rowNumber=false] [The number of the row]
+     * @return {[int / float]}                    [on succes we return the total amount]
+     */
     oneRow: function(rowNumber = false) {
       if (rowNumber != false) {
         if (rowNumber < row.length -1) {
@@ -30,10 +35,19 @@ var rowCounter;
       }
 
     },
+
+    /**
+     * Counts all numbers of the array
+     * @return {[int / float]} [The total amount of the array]
+     */
     allRows: function() {
       var teller = 0;
       row.forEach(function(rowArray, index, arr) {
+        // To loop trough the multi array
+
         rowArray.forEach(function(value, index, arr) {
+          // To loop trough all the values of the selected row
+
           teller = teller + parseFloat(value);
         });
       });
