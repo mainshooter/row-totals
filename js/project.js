@@ -6,6 +6,7 @@ var row = [
 ];
 
 var rowCounter;
+var TabelGen;
 
 (function() {
   rowCounter = {
@@ -52,6 +53,23 @@ var rowCounter;
         });
       });
       return(teller);
+    }
+  }
+})();
+
+(function() {
+  TabelGen = {
+    maximumCols: function() {
+      var currentMax = 0;
+      row.forEach(function(rowArray, index, arr) {
+          if (currentMax < rowArray.length) {
+            currentMax = rowArray.length;
+          }
+      });
+      return(currentMax);
+    },
+    maximumRows: function() {
+      return(row.length);
     }
   }
 })();
