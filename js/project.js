@@ -1,12 +1,36 @@
 var row = [
-  [9,21,14,43],
+  [9,21,14],
   [11,5,27],
   [29,17,6],
-  [29,1,5,9],
 ];
 
 var rowCounter;
+var TableFlip;
 var TabelGen;
+
+var tmpTable;
+
+(function() {
+  TableFlip = {
+
+    flipArray: function() {
+      tmpTable = new Array(row.length);
+      for (var i = 0; i < row.length; ++i) {
+        tmpTable[i] = new Array(row[i].length);
+      }
+      // To create empty array as a copy
+
+      row.forEach(function(rowArray, indexTop, arrTop) {
+        // tmpTable [arrTop[indexTop];
+        rowArray.forEach(function(value, index, arr) {
+          tmpTable[index][indexTop] = value;
+        });
+        row = tmpTable;
+        select("#test").innerHTML = TabelGen.generate();
+      });
+    }
+  }
+})();
 
 (function() {
   rowCounter = {
@@ -74,7 +98,7 @@ var TabelGen;
 
     header: function() {
       var content = '';
-      for (var i = 0; i < TabelGen.maximumRows() + 1; i++) {
+      for (var i = 0; i < TabelGen.maximumRows(); i++) {
         content += "<th>" + i + "</th>";
       }
       return(content);
@@ -84,7 +108,7 @@ var TabelGen;
       var content = '';
       row.forEach(function(rowArray, index, arr) {
         content += '<tr>';
-        content += '<th>' + index + '</th>';
+          // content += '<th>' + index + '</th>';
         rowArray.forEach(function(value, index, arr) {
           content += '<td>' + value +  '</td>';
         });
@@ -96,7 +120,7 @@ var TabelGen;
     generate: function() {
       var table = '<table>';
       table += '<tr>';
-      table += TabelGen.header();
+      // table += TabelGen.header();
       table += '</tr>';
       table += TabelGen.content();
       table += '</table>';
@@ -105,4 +129,4 @@ var TabelGen;
   }
 })();
 
-select("#test").innerHTML = TabelGen.generate();
+// select("#test").innerHTML = TabelGen.generate();
